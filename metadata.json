@@ -1,0 +1,6 @@
+{
+  "name": "Rahifa Books",
+  "description": "A Material 3 digital library and realistic real-book PDF reader with Cloud Firestore sync and a protected Admin Panel.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

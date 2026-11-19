@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Rahifa Books</string>
+    <string name="nav_library">Library</string>
+    <string name="nav_categories">Categories</string>
+    <string name="nav_bookmarks">Bookmarks</string>
+    <string name="nav_reading_theme">Reading Theme</string>
+    <string name="nav_admin_panel">Admin Panel</string>
+    <string name="search_books_hint">Search titles, authors, categories…</string>
+    <string name="empty_library_title">Your Library Awaits</string>
+    <string name="empty_library_subtitle">No published books are in the catalog yet. Administrators can upload PDF books via the Admin Panel, or try our interactive Real Book reader preview below.</string>
+    <string name="preview_sample_reader">Preview Sample Book</string>
+    <string name="admin_access_title">Admin Portal</string>
+    <string name="admin_access_subtitle">Sign in with your authorized Admin Google account to publish books, manage categories, and post announcements.</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="read_only_notice">Protected Read-Only View • External downloads disabled</string>
+</resources>

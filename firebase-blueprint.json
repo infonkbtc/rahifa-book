@@ -1,0 +1,170 @@
+{
+  "entities": {
+    "Book": {
+      "title": "Book",
+      "description": "A published or draft PDF book in the Rahifa Books catalog.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the book (1-150 characters)."
+        },
+        "author": {
+          "type": "string",
+          "description": "Author name (1-100 characters)."
+        },
+        "categoryId": {
+          "type": "string",
+          "description": "Document ID of the book's category in /categories."
+        },
+        "categoryName": {
+          "type": "string",
+          "description": "Denormalized display name of the category (1-60 characters)."
+        },
+        "description": {
+          "type": "string",
+          "description": "Book synopsis or description (0-2000 characters)."
+        },
+        "coverUrl": {
+          "type": "string",
+          "description": "HTTPS download URL of the book cover image, or empty string."
+        },
+        "pdfUrl": {
+          "type": "string",
+          "description": "HTTPS download URL of the PDF file."
+        },
+        "published": {
+          "type": "boolean",
+          "description": "True if visible to all readers, false if hidden draft."
+        },
+        "featured": {
+          "type": "boolean",
+          "description": "True if highlighted as a featured book."
+        },
+        "pageCount": {
+          "type": "integer",
+          "description": "Total page count if known, or 0."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "UID of the admin who created this book."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp set via FieldValue.serverTimestamp()."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp set via FieldValue.serverTimestamp()."
+        }
+      },
+      "required": [
+        "title",
+        "author",
+        "categoryId",
+        "categoryName",
+        "description",
+        "coverUrl",
+        "pdfUrl",
+        "published",
+        "featured",
+        "pageCount",
+        "createdBy",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "A book genre or category managed by the Admin.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Category display name (1-60 characters)."
+        },
+        "description": {
+          "type": "string",
+          "description": "Short category description (0-300 characters)."
+        },
+        "bookCount": {
+          "type": "integer",
+          "description": "Optional cached book count."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp set via FieldValue.serverTimestamp()."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp set via FieldValue.serverTimestamp()."
+        }
+      },
+      "required": ["name", "description", "createdAt", "updatedAt"]
+    },
+    "Announcement": {
+      "title": "Announcement",
+      "description": "An app banner or announcement displayed to readers on the Library home.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Announcement headline (1-120 characters)."
+        },
+        "message": {
+          "type": "string",
+          "description": "Announcement body text (1-500 characters)."
+        },
+        "active": {
+          "type": "boolean",
+          "description": "Whether the announcement banner is currently shown to readers."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp set via FieldValue.serverTimestamp()."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp set via FieldValue.serverTimestamp()."
+        }
+      },
+      "required": ["title", "message", "active", "createdAt", "updatedAt"]
+    },
+    "AdminRecord": {
+      "title": "AdminRecord",
+      "description": "Read-only admin authorization document keyed by UID.",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Admin email address."
+        }
+      },
+      "required": ["email"]
+    }
+  },
+  "firestore": {
+    "/books/{bookId}": {
+      "schema": { "$ref": "#/entities/Book" },
+      "description": "Catalog of books. Published books are readable by anyone; only Admins can create, edit, or delete."
+    },
+    "/categories/{categoryId}": {
+      "schema": { "$ref": "#/entities/Category" },
+      "description": "Book categories. Readable by anyone; only Admins can create, rename, or delete."
+    },
+    "/announcements/{announcementId}": {
+      "schema": { "$ref": "#/entities/Announcement" },
+      "description": "App banners and announcements. Active announcements are readable by anyone; only Admins can manage."
+    },
+    "/admins/{adminId}": {
+      "schema": { "$ref": "#/entities/AdminRecord" },
+      "description": "Admin UID allowlist. Only readable for own UID; writes blocked from client SDKs."
+    }
+  }
+}
